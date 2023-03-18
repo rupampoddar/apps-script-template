@@ -1,0 +1,44 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "pipeline": {
+    "build":                          {
+                                        "dependsOn": ["^build"],
+                                        "outputs": ["dist/**", ".next/**"]
+                                      },
+    "clean":                          { "cache": false },
+    "dev":                            { "cache": false },
+    "lint":                           { "outputs": [] },
+    "serve":                          { "cache": false },
+
+    "build:dev":                      {},
+    "build:staging":                  {},
+    "build:production":               {},
+
+    "clasp:push:dev":                 { "outputs": [], "cache": false },
+    "clasp:push:staging":             { "outputs": [], "cache": false },
+    "clasp:push:production":          { "outputs": [], "cache": false },
+
+    "deploy:staging":                 {},
+    "deploy:production":              {},
+
+    "prep":                           {},
+    "prep:dev":                       {},
+
+    "gas-backend#build:dev":          { "dependsOn": [ "gas-root#prep" ] },
+    "gas-backend#build:staging":      { "dependsOn": [ "gas-root#prep" ] },
+    "gas-backend#build:production":   { "dependsOn": [ "gas-root#prep" ] },
+
+    "gas-cdn#deploy:staging":         { "dependsOn": [ "gas-frontend#build:staging" ] },
+    "gas-cdn#deploy:production":      { "dependsOn": [ "gas-frontend#build:production" ] },
+
+    "gas-frontend#build:dev":         { "dependsOn": [ "gas-root#prep" ] },
+    "gas-frontend#build:staging":     { "dependsOn": [ "gas-root#prep" ] },
+    "gas-frontend#build:production":  { "dependsOn": [ "gas-root#prep" ] },
+    "gas-frontend#serve":             { "cache": false },
+
+    "gas-root#prep":                  { "cache": false },
+    "gas-root#clasp:push:dev":        { "dependsOn": [ "gas-frontend#build:dev", "gas-backend#prep:dev" ] },
+    "gas-root#clasp:push:staging":    { "dependsOn": [ "gas-frontend#build:staging", "gas-backend#build:staging" ] },
+    "gas-root#clasp:push:production": { "dependsOn": [ "gas-frontend#build:production", "gas-backend#build:production" ] }
+  }
+}

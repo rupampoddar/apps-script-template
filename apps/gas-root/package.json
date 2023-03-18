@@ -1,0 +1,16 @@
+{
+  "name": "gas-root",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "clean": "rimraf dist .turbo",
+    "prep": "node ./scripts/prep.js",
+    "clasp:push:dev": "clasp push --watch",
+    "clasp:push:staging": "clasp push -f",
+    "clasp:push:production": "clasp push -f"
+  },
+  "devDependencies": {
+    "@google/clasp": "^2.4.2",
+    "@types/google-apps-script": "^1.0.58"
+  }
+}

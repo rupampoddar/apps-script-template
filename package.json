@@ -1,0 +1,31 @@
+{
+  "name": "apps-script-template",
+  "version": "0.0.1",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "turbo run build",
+    "clean": "turbo run clean",
+    "dev": "turbo run dev --parallel",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,md}\"",
+    "gas:dev": "turbo run build:dev clasp:push:dev serve --filter=gas-backend --filter=gas-frontend --filter=gas-root --parallel",
+    "gas:deploy:staging": "turbo run build:staging clasp:push:staging deploy:staging --filter=gas-backend --filter=gas-frontend --filter=gas-root --filter=gas-cdn --force",
+    "gas:deploy:production": "turbo run build:production clasp:push:production deploy:production --filter=gas-backend --filter=gas-frontend --filter=gas-root --filter=gas-cdn --force"
+  },
+  "devDependencies": {
+    "@types/node": "^18.15.3",
+    "prettier": "latest",
+    "ts-node": "^10.9.1",
+    "turbo": "latest",
+    "typescript": "^4.9.5"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "packageManager": "pnpm@7.18.1"
+}

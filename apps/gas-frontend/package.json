@@ -1,0 +1,27 @@
+{
+  "name": "gas-frontend",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "scripts": {
+    "clean": "rimraf dist .turbo",
+    "lint": "tsc --noEmit",
+    "build:dev": "node vite_dev_build.js",
+    "build:staging": "tsc && vite build --mode staging",
+    "build:production": "tsc && vite build",
+    "serve": "vite"
+  },
+  "dependencies": {
+    "gas-client-fork": "^0.1.0"
+  },
+  "devDependencies": {
+    "rimraf": "^4.4.0",
+    "rollup": "^3.19.1",
+    "typescript": "^4.9.5",
+    "vite": "^4.2.0",
+    "vite-plugin-mkcert": "^1.13.3",
+    "vite-plugin-singlefile": "^0.13.3",
+    "vite-plugin-static-copy": "^0.13.1",
+    "vite-tsconfig-paths": "^4.0.7"
+  }
+}

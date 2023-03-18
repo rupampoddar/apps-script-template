@@ -1,0 +1,31 @@
+<!--
+  Development server template
+-->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <base target="_top">
+</head>
+
+<body>
+
+  <div id="root"></div>
+
+  <!--
+    Patch for scriptlet
+    (https://developers.google.com/apps-script/guides/html/templates#printing_scriptlets)
+  -->
+  <input type="hidden" id="__TEMPLATE_DATA__" value="<?= JSON.stringify(data) ?>">
+
+  <!--
+    script will be bundled and inlined
+  -->
+  <script type="module">
+    import "./index.js"
+  </script>
+
+</body>
+
+</html>
