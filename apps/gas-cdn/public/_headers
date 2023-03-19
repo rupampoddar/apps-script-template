@@ -1,0 +1,7 @@
+/*
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=604800
+
+/index.html
+  ! Access-Control-Allow-Origin
+  ! Cache-Control

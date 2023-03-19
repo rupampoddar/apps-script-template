@@ -1,3 +1,4 @@
 .turbo
 public/*
 !public/index.html
+!public/_headers
