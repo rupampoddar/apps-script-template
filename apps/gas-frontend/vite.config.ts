@@ -1,7 +1,6 @@
 import { resolve } from "path";
 import { defineConfig, loadEnv } from "vite";
 import { viteStaticCopy } from "vite-plugin-static-copy";
-import { viteSingleFile } from "vite-plugin-singlefile";
 import mkcert from "vite-plugin-mkcert";
 // import react from "@vitejs/plugin-react";
 import tsconfigPaths from "vite-tsconfig-paths";
@@ -19,11 +18,9 @@ export default defineConfig(({ command, mode }) => {
   // https://vitejs.dev/config/#environment-variables
   const env = loadEnv(mode, resolve(__dirname, "../gas-root"), "");
 
-  // -
-  // CDN config
-  // -
-  // const CDN_URL = `${env.PUBLIC_CDN_HOST}/${env.PUBLIC_PACKAGE_VERSION}/`;
-  // console.log(`[vite.config.ts] cdn url: ${CDN_URL}`);
+  // CDN url
+  const CDN_URL = `${env.PUBLIC_CDN_HOST}/${env.PUBLIC_PACKAGE_VERSION}/`;
+  console.log(`[vite.config.ts] cdn url: ${CDN_URL}`);
 
   if (command === "serve") {
     //
@@ -33,7 +30,7 @@ export default defineConfig(({ command, mode }) => {
       plugins: [
         tsconfigPaths(),
         //react(),
-        mkcert()
+        mkcert(),
       ],
       clearScreen: false,
       envDir: "../gas-root",
@@ -64,48 +61,30 @@ export default defineConfig(({ command, mode }) => {
       },
       plugins: [
         tsconfigPaths(),
-        // -
-        // React integration
-        // -
+        // React integration (uncomment if you're using react)
         // react(),
 
-        // -
-        // This plugin bundles everything in a single html file.
-        // Comment this line if you're using CDN functionality.
-        // -
-        viteSingleFile(),
-
-        // -
         // Copy html files to gas-root/dist and assets to gas-cdn/public
-        // -
         viteStaticCopy({
           targets: [
             {
               src: "dist/*.html",
               dest: resolve(__dirname, "../gas-root/dist"),
             },
-            // -
-            // CDN configuration
-            // -
-            // {
-            //   src: "dist/assets/*",
-            //   dest: resolve(
-            //     __dirname,
-            //     `../gas-cdn/public/${env.PUBLIC_PACKAGE_VERSION}/assets`
-            //   ),
-            // },
+            {
+              src: "dist/assets/*",
+              dest: resolve(
+                __dirname,
+                `../gas-cdn/public/${env.PUBLIC_PACKAGE_VERSION}/assets`
+              ),
+            },
           ],
         }),
       ],
       clearScreen: false,
       envDir: "../gas-root",
       envPrefix: "PUBLIC_",
-
-      // -
-      // CDN configuration
-      // -
-      // base: CDN_URL,
-
+      base: CDN_URL,
       build: {
         rollupOptions: {
           input: {
