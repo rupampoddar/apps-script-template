@@ -18,12 +18,11 @@
     "gas:deploy:production": "turbo run build:production clasp:push:production deploy:production --filter=gas-backend --filter=gas-frontend --filter=gas-root --filter=gas-cdn --force"
   },
   "devDependencies": {
-    "@types/node": "^18.15.3",
+    "@types/node": "^20.8.2",
     "prettier": "latest",
     "ts-node": "^10.9.1",
     "turbo": "latest",
-    "typescript": "^4.9.5",
-    "wrangler": "^2.12.3"
+    "typescript": "^4.9.5"
   },
   "engines": {
     "node": ">=14.0.0"
