@@ -11,6 +11,7 @@
   },
   "devDependencies": {
     "@google/clasp": "^2.4.2",
-    "@types/google-apps-script": "^1.0.58"
+    "@types/google-apps-script": "^1.0.58",
+    "rimraf": "^4.4.0"
   }
 }
