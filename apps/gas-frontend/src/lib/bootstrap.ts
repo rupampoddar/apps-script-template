@@ -30,8 +30,8 @@ export async function init() {
 
         // Now that you have the data, use it as you wish
         if (data.activeUserEmail) {
-          const t = document.getElementById("currentUser");
-          if (t) t.innerText = `Logged in as: ${data.activeUserEmail}`;
+          // const t = document.getElementById("currentUser");
+          // if (t) t.innerText = `Logged in as: ${data.activeUserEmail}`;
         }
       } catch (e) {
         console.error("[bootstrap/init]", e);
