@@ -1,4 +1,4 @@
-export async function api_hello() {
+export async function getData() {
   return {
     success: true,
     data: {

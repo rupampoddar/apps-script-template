@@ -30,7 +30,7 @@ export function ui_openSidebar() {
   try {
     // prepare the html output.
     // 'index' refers to apps/gas-frontend/index.html
-    let htmlTemplate = HtmlService.createTemplateFromFile("index");
+    let htmlTemplate = HtmlService.createTemplateFromFile("sidebar-1");
 
     // pass data from gas-backend to gas-frontend
     htmlTemplate.data = {
