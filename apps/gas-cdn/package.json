@@ -8,6 +8,7 @@
     "deploy:production": "CLOUDFLARE_ACCOUNT_ID=<YOUR_CF_ACC_ID> wrangler pages deploy ./public --project-name=<CF_PAGES_PROJECT_NAME> --branch=main"
   },
   "devDependencies": {
+    "rimraf": "^4.4.0",
     "wrangler": "^2.12.3"
   }
 }
