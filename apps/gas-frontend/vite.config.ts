@@ -1,9 +1,19 @@
 import { resolve } from "path";
 import { defineConfig, loadEnv } from "vite";
 import { viteStaticCopy } from "vite-plugin-static-copy";
+import { viteSingleFile } from "vite-plugin-singlefile";
 import mkcert from "vite-plugin-mkcert";
 // import react from "@vitejs/plugin-react";
 import tsconfigPaths from "vite-tsconfig-paths";
+
+// List the html files
+const htmlFiles = {
+  sidebar1: resolve(__dirname, "sidebar-1.html"),
+  // modal1: resolve(__dirname, "modal-1.html"),
+  // sidebar2: resolve(__dirname, "sidebar-2.html"),
+  // modal2: resolve(__dirname, "modal-2.html"),
+  // etc.
+}
 
 // -
 // https://vitejs.dev/config/
@@ -17,10 +27,6 @@ export default defineConfig(({ command, mode }) => {
   // load env vars from .env files
   // https://vitejs.dev/config/#environment-variables
   const env = loadEnv(mode, resolve(__dirname, "../gas-root"), "");
-
-  // CDN url
-  const CDN_URL = `${env.PUBLIC_CDN_HOST}/${env.PUBLIC_PACKAGE_VERSION}/`;
-  console.log(`[vite.config.ts] cdn url: ${CDN_URL}`);
 
   if (command === "serve") {
     //
@@ -38,7 +44,7 @@ export default defineConfig(({ command, mode }) => {
       build: {
         rollupOptions: {
           input: {
-            index: resolve(__dirname, "index.html"),
+            ...htmlFiles
           },
         },
       },
@@ -64,19 +70,15 @@ export default defineConfig(({ command, mode }) => {
         // React integration (uncomment if you're using react)
         // react(),
 
-        // Copy html files to gas-root/dist and assets to gas-cdn/public
+        // This plugin bundles everything in a single html file.
+        viteSingleFile(),
+
+        // Copy html files to gas-root/dist
         viteStaticCopy({
           targets: [
             {
               src: "dist/*.html",
               dest: resolve(__dirname, "../gas-root/dist"),
-            },
-            {
-              src: "dist/assets/*",
-              dest: resolve(
-                __dirname,
-                `../gas-cdn/public/${env.PUBLIC_PACKAGE_VERSION}/assets`
-              ),
             },
           ],
         }),
@@ -84,11 +86,10 @@ export default defineConfig(({ command, mode }) => {
       clearScreen: false,
       envDir: "../gas-root",
       envPrefix: "PUBLIC_",
-      base: CDN_URL,
       build: {
         rollupOptions: {
           input: {
-            index: resolve(__dirname, "index.html"),
+            ...htmlFiles
           },
         },
       },
