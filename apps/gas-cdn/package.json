@@ -4,7 +4,10 @@
   "description": "",
   "scripts": {
     "clean": "rimraf .turbo",
-    "deploy:staging": "CLOUDFLARE_ACCOUNT_ID=<YOUR_CF_ACC_ID> wrangler pages publish ./public --project-name=<CF_PAGES_PROJECT_NAME> --branch=main",
-    "deploy:production": "CLOUDFLARE_ACCOUNT_ID=<YOUR_CF_ACC_ID> wrangler pages publish ./public --project-name=<CF_PAGES_PROJECT_NAME> --branch=main"
+    "deploy:staging": "CLOUDFLARE_ACCOUNT_ID=<YOUR_CF_ACC_ID> wrangler pages deploy ./public --project-name=<CF_PAGES_PROJECT_NAME> --branch=main",
+    "deploy:production": "CLOUDFLARE_ACCOUNT_ID=<YOUR_CF_ACC_ID> wrangler pages deploy ./public --project-name=<CF_PAGES_PROJECT_NAME> --branch=main"
+  },
+  "devDependencies": {
+    "wrangler": "^2.12.3"
   }
 }
