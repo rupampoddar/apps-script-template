@@ -32,6 +32,9 @@ const validateMessageOrigin = (eventOrigin) => {
 };
 
 let iframeElement = document.createElement("iframe");
+iframeElement.allow =
+  "accelerometer *; ambient-light-sensor *; autoplay *; camera *; clipboard-read *; clipboard-write *; encrypted-media *; fullscreen *; geolocation *; gyroscope *; magnetometer *; microphone *; midi *; payment *; picture-in-picture *; screen-wake-lock *; speaker *; sync-xhr *; usb *; web-share *; vibrate *; vr *";
+iframeElement.id = "devIFrame";
 iframeElement.setAttribute("src", `https://localhost:${PORT}/${FILENAME}`);
 iframeElement.style.position = "fixed";
 iframeElement.style.top = 0;
