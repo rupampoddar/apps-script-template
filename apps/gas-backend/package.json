@@ -11,7 +11,6 @@
     "build:staging": "tsc && NODE_ENV=staging rollup --config",
     "build:production": "tsc && NODE_ENV=production rollup --config"
   },
-  "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.21.3",
     "@babel/plugin-transform-runtime": "^7.21.0",
@@ -24,6 +23,7 @@
     "@types/google-apps-script": "^1.0.58",
     "@types/node": "^18.15.3",
     "dotenv": "^16.0.3",
+    "rimraf": "^4.4.0",
     "rollup": "^2.79.1",
     "rollup-plugin-copy": "^3.4.0",
     "rollup-plugin-delete": "^2.0.0",
