@@ -1,9 +1,31 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref } from "vue";
 
-defineProps<{ msg: string }>()
+// These 2 lines are needed to call apps-script (`gas-backend`) functions
+import server from "../lib/server";
+const { serverFunctions } = server;
 
-const count = ref(0)
+defineProps<{ msg: string }>();
+const count = ref(0);
+
+//
+// Example: fetch data from apps script
+//
+const jsonData = ref<null | string>(null);
+const isLoading = ref(false);
+const fetchData = async () => {
+  try {
+    isLoading.value = true;
+    // Call the `gas-backend` function (see `gas-backend/src/index.ts`)
+    const data = await serverFunctions.getData();
+    console.log(data);
+    jsonData.value = JSON.stringify(data, null, 2);
+  } catch (e) {
+    console.error("Error fetching data:", e);
+  } finally {
+    isLoading.value = false;
+  }
+};
 </script>
 
 <template>
@@ -17,22 +39,20 @@ const count = ref(0)
     </p>
   </div>
 
-  <p>
-    Check out
-    <a href="https://vuejs.org/guide/quick-start.html#local" target="_blank"
-      >create-vue</a
-    >, the official Vue + Vite starter
-  </p>
-  <p>
-    Install
-    <a href="https://github.com/vuejs/language-tools" target="_blank">Volar</a>
-    in your IDE for a better DX
-  </p>
-  <p class="read-the-docs">Click on the Vite and Vue logos to learn more</p>
+  <div class="card">
+    <button type="button" @click="fetchData" :disabled="isLoading">
+      {{ isLoading ? "Loading..." : "Fetch Data from Apps-Script" }}
+    </button>
+    <pre>{{ jsonData }}</pre>
+
+  </div>
 </template>
 
 <style scoped>
 .read-the-docs {
   color: #888;
+}
+pre {
+  text-align: left;
 }
 </style>
