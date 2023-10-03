@@ -1,6 +1,6 @@
 {
   "name": "apps-script-template",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "workspaces": [
     "apps/*",
@@ -14,8 +14,10 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "format:check": "prettier --check \"**/*.{ts,tsx,md}\"",
     "gas:dev": "turbo run build:dev clasp:push:dev serve --filter=gas-backend --filter=gas-frontend --filter=gas-root --parallel",
-    "gas:deploy:staging": "turbo run build:staging clasp:push:staging deploy:staging --filter=gas-backend --filter=gas-frontend --filter=gas-root --filter=gas-cdn --force",
-    "gas:deploy:production": "turbo run build:production clasp:push:production deploy:production --filter=gas-backend --filter=gas-frontend --filter=gas-root --filter=gas-cdn --force"
+    "gas:deploy:staging": "turbo run build:staging clasp:push:staging --filter=gas-backend --filter=gas-frontend --filter=gas-root --force",
+    "gas:deploy:production": "turbo run build:production clasp:push:production --filter=gas-backend --filter=gas-frontend --filter=gas-root --force",
+    "gas:deploy_with_cdn:staging": "turbo run build:staging clasp:push:staging deploy:staging --filter=gas-backend --filter=gas-frontend --filter=gas-root --filter=gas-cdn --force",
+    "gas:deploy_with_cdn:production": "turbo run build:production clasp:push:production deploy:production --filter=gas-backend --filter=gas-frontend --filter=gas-root --filter=gas-cdn --force"
   },
   "devDependencies": {
     "@types/node": "^20.8.2",
